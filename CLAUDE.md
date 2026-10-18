@@ -20,6 +20,12 @@
 - テスト: 未導入
 - Lint / フォーマット: 未導入
 
+## デプロイ
+
+- GitHub Pages で公開する（https://timmy-0123bot.github.io/task-board/）
+- `main` へのプッシュで `.github/workflows/deploy.yml` が実行され、`dist` が自動デプロイされる
+- `vite.config.js` の `base: './'` は Pages のサブパス配下で動かすための設定なので変更しない
+
 ## コーディング規約
 
 - 既存コードの命名・書き方・コメント量に合わせる
