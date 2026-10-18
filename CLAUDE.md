@@ -8,7 +8,7 @@
 - 概要: タスク管理ボードアプリケーション（タスクの追加・完了切り替え・削除）
 - 技術スタック: React 19 + Vite（JavaScript / JSX）
 - 構成:
-  - `src/App.jsx` — タスクボード本体（状態管理は `useState`、データは保存しない）
+  - `src/App.jsx` — タスクボード本体（状態管理は `useState`、タスクは localStorage の `task-board.tasks` に保存）
   - `src/App.css` — スタイル
   - `src/main.jsx` — エントリーポイント
 
