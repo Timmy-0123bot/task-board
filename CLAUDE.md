@@ -6,11 +6,24 @@
 
 - プロジェクト名: task-board
 - 概要: タスク管理ボードアプリケーション（タスクの追加・完了切り替え・削除）
-- 技術スタック: React 19 + Vite（JavaScript / JSX）
 - 構成:
   - `src/App.jsx` — タスクボード本体（状態管理は `useState`、タスクは localStorage の `task-board.tasks` に保存）
   - `src/App.css` — スタイル
   - `src/main.jsx` — エントリーポイント
+
+## 技術スタック
+
+| 分類 | 使用技術 |
+| --- | --- |
+| UI ライブラリ | React 19（関数コンポーネント + Hooks） |
+| 言語 | JavaScript（JSX）。TypeScript は未使用 |
+| ビルドツール | Vite 8（`@vitejs/plugin-react`） |
+| スタイル | 素の CSS（`src/App.css`）。CSS フレームワークは未使用 |
+| データ保存 | ブラウザの localStorage（サーバー・DB なし） |
+| 実行環境 | Node.js 24 |
+| ホスティング | GitHub Pages（GitHub Actions で自動デプロイ） |
+
+- 外部ライブラリの追加は必要最小限にし、追加する場合は理由をユーザーに伝える
 
 ## 開発コマンド
 
@@ -20,9 +33,11 @@
 - テスト: 未導入
 - Lint / フォーマット: 未導入
 
-## デプロイ
+## デプロイ先
 
-- GitHub Pages で公開する（https://timmy-0123bot.github.io/task-board/）
+https://timmy-0123bot.github.io/task-board/
+
+- GitHub Pages で公開している
 - `main` へのプッシュで `.github/workflows/deploy.yml` が実行され、`dist` が自動デプロイされる
 - `vite.config.js` の `base: './'` は Pages のサブパス配下で動かすための設定なので変更しない
 
@@ -31,6 +46,24 @@
 - 既存コードの命名・書き方・コメント量に合わせる
 - 変更は依頼された範囲に留め、無関係なリファクタリングは行わない
 - 秘密情報（APIキー、パスワード、`.env` の中身など）はコミットしない
+
+### コンポーネントの命名規約
+
+| 対象 | 規約 | 例 |
+| --- | --- | --- |
+| コンポーネント名 | PascalCase | `App`, `TaskItem` |
+| コンポーネントのファイル | コンポーネント名と同じ PascalCase + `.jsx` | `App.jsx`, `TaskItem.jsx` |
+| 定義の書き方 | `export default function 名前()` の関数宣言で、1ファイル1コンポーネント | `export default function App()` |
+| state | `[名詞, set名詞]` | `[tasks, setTasks]`, `[text, setText]` |
+| イベント処理関数 | 動詞 + 名詞の camelCase | `addTask`, `toggleTask`, `deleteTask` |
+| 親から渡すイベント props | `on` + 動詞 | `onToggle`, `onDelete` |
+| コンポーネント外の関数 | camelCase | `loadTasks` |
+| 定数 | UPPER_SNAKE_CASE | `STORAGE_KEY` |
+| CSS クラス | kebab-case | `add-form`, `task-list` |
+| 状態を表す CSS クラス | 基本クラスに追加する | `task done` |
+
+- コンポーネントを分割するときは `src/components/` に置く（例: `src/components/TaskItem.jsx`）
+- UI の文言・`aria-label` は日本語で書く
 
 ## Git 運用ルール
 
